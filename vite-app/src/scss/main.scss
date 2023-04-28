@@ -1,0 +1,138 @@
+$primary-color: white;
+
+body {
+    background-color: $primary-color;
+}
+
+.navbar {
+    max-height: 150px;
+    margin-top: 0px;
+    background-color: #6397E0;
+}
+
+.titulo {
+    font-family: 'Raleway';
+    font-weight: 550;
+    font-size: calc(100% + 1.5vw + 1.5vh);
+    color: #485261;
+}
+
+.contenidoPrincipal {
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 25px;
+    color: #485261;
+    text-align: justify;
+    padding-top: 20px;
+}
+
+.ambientes {
+    font-family: 'Raleway';
+    font-weight: 800;
+    padding-top: 10px;
+    font-size: calc(100% + 1vw + 1vh);
+    color: #485261;
+}
+
+.logoUniandes {
+    text-align: left;
+
+}
+
+.tituloAmb {
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 30px;
+    color: #485261;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.imagenAmb {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 300px;
+    border: 2px solid black;
+}
+
+.btnIr {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 85px;
+}
+
+.tituloPagina {
+    font-family: 'Raleway';
+    font-weight: bold;
+    font-size: 40px;
+    color: black;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inicio {
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 35px;
+    color: black;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 0px;
+}
+
+.snippet {
+    margin-top: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+
+    padding: 0;
+    border: 2px solid rgba(65, 60, 60, 0.356);
+    height: 500px;
+    max-width: auto;
+    overflow-y: auto
+}
+
+.tituloSnippet {
+    margin-top: 10px;
+    margin-left: 100px;
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 20px;
+    color: black;
+    text-align: right;
+}
+
+.parametros {
+    margin: auto;
+}
+
+.imagenMaze {
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 400px;
+}
+
+.resultado {
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btnComprobar {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    font-size: 20px;
+
+}
