@@ -63,6 +63,8 @@ const Laberinto = () => {
 
   const ws = new WebSocket("ws://localhost:8082");
 
+  console.log("what");
+
   ws.addEventListener("open", () =>{
       console.log("We are connected");
   });
