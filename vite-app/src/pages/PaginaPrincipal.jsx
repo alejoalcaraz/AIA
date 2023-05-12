@@ -2,6 +2,24 @@ import { NavLink } from "react-router-dom"
 import Navbar from "../components/Navbar"
 
 const PaginaPrincipal = () => {
+
+  var conn = new WebSocket('wss://aiadeploy.onrender.com');
+  conn.onopen = function (e) {
+    console.log("Connection established!");
+  };
+  setInterval(() => {
+    conn.send('Hello server!');
+  }, 1000);
+  conn.onmessage = function (e) {
+    console.log(e.data);
+  };
+  conn.onclose = function (e) {
+    console.log(e.code);
+    console.log(e.reason);
+  };
+  conn.onerror = function (e) {
+    console.log(e);
+  };
   return (<>
     <div>
       <div className="row">
@@ -26,10 +44,10 @@ const PaginaPrincipal = () => {
             <div className="tituloAmb"> 1. Laberinto</div>
           </div>
           <div className="row">
-          <NavLink to="/laberintoAIA" state="Laberinto AIA">
-            <button className="btn btn-default">
-              <img src="right.png" className="btnIr"/>
-            </button>
+            <NavLink to="/laberintoAIA" state="Laberinto AIA">
+              <button className="btn btn-default">
+                <img src="right.png" className="btnIr" />
+              </button>
             </NavLink>
           </div>
         </div>
@@ -42,10 +60,10 @@ const PaginaPrincipal = () => {
             <div className="tituloAmb"> 2. Bodegas Inteligentes</div>
           </div>
           <div className="row">
-          <NavLink to="/bodegasInteligentes" state="Bodegas Inteligentes">
-            <button className="btn btn-default">
-              <img src="right.png" className="btnIr"/>
-            </button>
+            <NavLink to="/bodegasInteligentes" state="Bodegas Inteligentes">
+              <button className="btn btn-default">
+                <img src="right.png" className="btnIr" />
+              </button>
             </NavLink>
           </div>
         </div>
@@ -58,10 +76,10 @@ const PaginaPrincipal = () => {
             <div className="tituloAmb"> 3. Brazo Interactivo</div>
           </div>
           <div className="row">
-          <NavLink to="/brazoInteractivo" state="Brazo Interactivo">
-            <button className="btn btn-default">
-              <img src="right.png" className="btnIr"/>
-            </button>
+            <NavLink to="/brazoInteractivo" state="Brazo Interactivo">
+              <button className="btn btn-default">
+                <img src="right.png" className="btnIr" />
+              </button>
             </NavLink>
           </div>
         </div>
@@ -69,7 +87,7 @@ const PaginaPrincipal = () => {
 
       </div>
     </div>
-    </>
+  </>
   )
 }
 
