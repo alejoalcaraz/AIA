@@ -61,13 +61,27 @@ const Laberinto = () => {
     hljs.highlightAll();
   });
 
-  const ws = new WebSocket('wss://https://aiadeploy.onrender.com');
+ 
 
   console.log("what");
 
-  ws.addEventListener("open", () =>{
-      console.log("We are connected");
-  });
+  var conn = new WebSocket('wss://aiadeploy.onrender.com');
+      conn.onopen = function(e) {
+          console.log("Connection established!");
+      };
+      setInterval(() => {
+        conn.send('Hello server!');
+      }, 1000);
+      conn.onmessage = function(e) {
+          console.log(e.data);
+      };
+      conn.onclose = function(e) {
+          console.log(e.code);
+          console.log(e.reason);
+      };              
+      conn.onerror = function(e) {
+          console.log(e);
+      };      
 
   return (
     <>
