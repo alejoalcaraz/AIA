@@ -72,8 +72,15 @@ const Laberinto = () => {
   };
   
  
-
-  
+  function enviarParametros() {
+    var parametros = 'Parametros:' + document.getElementById('parametro1').value + ',' +  document.getElementById('parametro2').value + ',' + document.getElementById('parametro3').value;
+    console.log(parametros);
+    
+    if(ws.readyState===1){
+      ws.send(parametros);
+      console.log("se mando");
+    };
+  };
 
   return (
     <>
@@ -104,7 +111,7 @@ const Laberinto = () => {
                   <label htmlFor="parametro3">Parámetro 3</label>
                   <input type="text" className="form-control" id="parametro3" placeholder="Ingresar parámetro 3" />
                 </div>
-                <button type="submit" className="btn btn-primary mt-2">Comprobar</button>
+                <button type="button" id="btnEnviarParams" onClick={enviarParametros} className="btn btn-primary mt-2">Comprobar</button>
               </form>
             </div>
           </div>
