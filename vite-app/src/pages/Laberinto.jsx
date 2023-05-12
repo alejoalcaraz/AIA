@@ -61,7 +61,7 @@ const Laberinto = () => {
     hljs.highlightAll();
   });
 
-  const ws = new WebSocket("ws://localhost:8082");
+  const ws = new WebSocket('wss://https://aiadeploy.onrender.com');
 
   console.log("what");
 
