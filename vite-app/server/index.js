@@ -1,6 +1,6 @@
 const WebSocket = require("ws");
 
-const wss = new WebSocket.Server({ port:8082});
+const wss = new WebSocket('wss://aiadeploy.onrender.com');
 
 wss.on("connection", ws=>{
 

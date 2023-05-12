@@ -27,12 +27,7 @@ function App() {
     <br />© 2023 Universidad de los Andes - Bogotá, Colombia
   </>
 
-  // return (
-  //   <>
-  //     <Navbar></Navbar>
-  //     <PaginaPrincipal></PaginaPrincipal>
-  //   </>
-  // )
+
 }
 
 export default App
