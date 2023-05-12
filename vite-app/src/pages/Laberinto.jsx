@@ -63,7 +63,15 @@ const Laberinto = () => {
 
  
 
-  console.log("what");
+  const serverAddress = 'wss://aia-remote-websocket-server.glitch.me/';
+  
+  const ws = new WebSocket(serverAddress);
+  
+  ws.onopen = function() {
+    ws.send("Soy el lab");
+  };
+  
+ 
 
   
 
