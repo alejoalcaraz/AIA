@@ -346,6 +346,18 @@ const Laberinto = () => {
     }
   };
 
+  function ejecutarRobot () {
+    console.log("ejecutar");
+    if (ws.readyState === 1) {
+      ws.send("Ejecutar");
+      console.log("se mando ejecucion");
+    }
+    else {
+      console.log("se mamo ejecucion", ws.readyState);
+      const ws = new WebSocket(serverAddress);
+    }
+  }
+
   return (
     <>
 
@@ -394,7 +406,7 @@ const Laberinto = () => {
             <div className="col-12 resultado" id="txtResultado"></div>
             <div id="timer" className="timer"> </div>
             <div className="col-4 btnVer">
-              <form action="https://google.com" target="_blank">
+            <form action="https://twitch.tv/pepimen843" target="_blank" onClick={ejecutarRobot}>
                 <button  type="submit" width="100px" className="btn btn-primary mt-2 btnVer" id="btnVerEnVivo" disabled={true}>Ver ejecución en vivo</button>
               </form>
             </div>
