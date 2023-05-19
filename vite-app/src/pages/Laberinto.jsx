@@ -283,11 +283,11 @@ const Laberinto = () => {
     else if (p1 < 0 || p1 > 1) {
       document.getElementById('error').innerHTML = 'El gamma debe encontrarse entre 0 y 1';
     }
-    else if (p2 < 0 || p2 > 2) {
-      document.getElementById('error').innerHTML = 'La tasa de aprendizaje debe encontrarse entre 0 y 2';
+    else if (p2 < 0 || p2 > 1) {
+      document.getElementById('error').innerHTML = 'La tasa de aprendizaje debe encontrarse entre 0 y 1';
     }
-    else if (p3 < 600 || p3 > 4000) {
-      document.getElementById('error').innerHTML = 'El número de iteraciones debe encontrarse entre 600 y 4000';
+    else if (p3 < 600 || p3 > 1500) {
+      document.getElementById('error').innerHTML = 'El número de iteraciones debe encontrarse entre 600 y 1500';
     }
     else {
       document.getElementById('error').innerHTML = '';
@@ -368,11 +368,11 @@ const Laberinto = () => {
                   <input type="text" className="form-control" id="parametro1" placeholder="Ingresar valor de gamma" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="parametro2">Tasa de Aprendizaje (0 a 2)</label>
+                  <label htmlFor="parametro2">Tasa de Aprendizaje (0 a 1)</label>
                   <input type="text" className="form-control" id="parametro2" placeholder="Ingresar taza de aprendizaje" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="parametro3">Número de iteraciones (600 a 4000)</label>
+                  <label htmlFor="parametro3">Número de iteraciones (600 a 1500)</label>
                   <input type="text" className="form-control" id="parametro3" placeholder="Ingresar número de iteraciones deseadas" />
                 </div>
                 <div className="errorMessage" id="error"> </div>
