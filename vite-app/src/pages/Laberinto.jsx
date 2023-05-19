@@ -341,6 +341,8 @@ const Laberinto = () => {
     else if (msg.data.toString().startsWith("Excedio")) {
       console.log(msg.data);
       document.getElementById('txtResultado').innerHTML = 'El modelo se excedió en el tiempo de respuesta y no encontró solución';
+      document.getElementById("timer").style.display = "none";
+      document.getElementById('btnVerEnVivo').disabled = true;
     }
   };
 
