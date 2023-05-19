@@ -406,7 +406,7 @@ const Laberinto = () => {
             <div className="col-12 resultado" id="txtResultado"></div>
             <div id="timer" className="timer"> </div>
             <div className="col-4 btnVer">
-            <form action="https://twitch.tv/pepimen843" target="_blank" onClick={ejecutarRobot}>
+            <form action="https://twitch.tv/aia_industrial" target="_blank" onClick={ejecutarRobot}>
                 <button  type="submit" width="100px" className="btn btn-primary mt-2 btnVer" id="btnVerEnVivo" disabled={true}>Ver ejecución en vivo</button>
               </form>
             </div>
