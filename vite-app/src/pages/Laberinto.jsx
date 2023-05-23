@@ -346,7 +346,7 @@ const Laberinto = () => {
     }
   };
 
-  function ejecutarRobot () {
+  function ejecutarRobot() {
     console.log("ejecutar");
     if (ws.readyState === 1) {
       ws.send("Ejecutar");
@@ -406,10 +406,25 @@ const Laberinto = () => {
             <div className="col-12 resultado" id="txtResultado"></div>
             <div id="timer" className="timer"> </div>
             <div className="col-4 btnVer">
-            <form action="https://twitch.tv/aia_industrial" target="_blank" onClick={ejecutarRobot}>
-                <button  type="submit" width="100px" className="btn btn-primary mt-2 btnVer" id="btnVerEnVivo" disabled={true}>Ver ejecución en vivo</button>
+              <form action="https://twitch.tv/aia_industrial" target="_blank" onClick={ejecutarRobot}>
+                <button type="submit" width="100px" className="btn btn-primary mt-2 btnVer" id="btnVerEnVivo" disabled={true}>Ver ejecución en vivo</button>
               </form>
             </div>
+            <div className="row tituloSnippet">
+            Ranking con resultados:
+          </div>
+            <table id="myTable" className="table">
+              <tr>
+                <th>Tiempo</th>
+                <th>Nombre</th>
+              </tr>
+              <tr>
+                <td>143.5</td>
+                <td>Alejandro Alcaraz</td>
+              </tr>
+              
+
+            </table>
           </div>
         </div>
       </div>
