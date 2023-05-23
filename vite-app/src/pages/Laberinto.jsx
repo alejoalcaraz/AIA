@@ -341,15 +341,13 @@ const Laberinto = () => {
       );
       a.innerHTML = "Link de forms";
       a.setAttribute("target", "_blank");
-      a.onclick = function () {
-        document.getElementById("btnVerEnVivo").disabled = false;
-      };
       document.getElementById("divForms").appendChild(a);
       document.getElementById("txtResultado").innerHTML =
         "El modelo encontró una solución en " +
         array[1] +
         ", llena el forms con este resultado y pulsa el botón para ver la solución en vivo";
       document.getElementById("timer").style.display = "none";
+      document.getElementById("btnVerEnVivo").disabled = false;
     } else if (msg.data.toString().startsWith("Excedio")) {
       console.log(msg.data);
       document.getElementById("txtResultado").innerHTML =
