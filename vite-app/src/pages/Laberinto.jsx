@@ -3,7 +3,6 @@ import hljs from "highlight.js";
 import { marked } from "marked";
 import { useEffect, useRef } from "react";
 
-
 const markdown = `
 \`\`\`python
 # #Se importan las librerías de interés
@@ -14,7 +13,7 @@ import time
 import matplotlib.pyplot as plt
 import sys
 
-def Qlearn(nombre="maze.csv", gamma = 0.8,tasa_aprendizaje = 0.5,iteraciones = 600):
+def Qlearn(nombre="maze.csv", gamma = **,tasa_aprendizaje = **,iteraciones = ****):
     #Se carga el laberinto del archivo
     laberinto = maze()
     laberinto.CreateMaze(loadMaze='maze.csv')
@@ -254,14 +253,11 @@ if __name__ == "__main__":
 `;
 
 const Laberinto = () => {
-
   useEffect(() => {
     hljs.highlightAll();
   });
 
-
-
-  const serverAddress = 'wss://aia-remote-websocket-server.glitch.me/';
+  const serverAddress = "wss://aia-remote-websocket-server.glitch.me/";
 
   const ws = new WebSocket(serverAddress);
 
@@ -269,36 +265,41 @@ const Laberinto = () => {
     ws.send("Soy el lab");
   };
 
-
   function enviarParametros() {
-    var p1 = parseFloat(document.getElementById('parametro1').value);
-    var p2 = parseFloat(document.getElementById('parametro2').value);
-    var p3 = parseFloat(document.getElementById('parametro3').value);
+    var p1 = parseFloat(document.getElementById("parametro1").value);
+    var p2 = parseFloat(document.getElementById("parametro2").value);
+    var p3 = parseFloat(document.getElementById("parametro3").value);
     if (isNaN(p1) || isNaN(p2) || isNaN(p3)) {
-      document.getElementById('error').innerHTML = 'Asegúrate de poner un número';
-    }
-    else if (p3 % 1 !== 0) {
-      document.getElementById('error').innerHTML = 'El Número de iteraciones debe ser entero';
-    }
-    else if (p1 < 0 || p1 > 1) {
-      document.getElementById('error').innerHTML = 'El gamma debe encontrarse entre 0 y 1';
-    }
-    else if (p2 < 0 || p2 > 1) {
-      document.getElementById('error').innerHTML = 'La tasa de aprendizaje debe encontrarse entre 0 y 1';
-    }
-    else if (p3 < 600 || p3 > 1500) {
-      document.getElementById('error').innerHTML = 'El número de iteraciones debe encontrarse entre 600 y 1500';
-    }
-    else {
-      document.getElementById('error').innerHTML = '';
-      var parametros = 'Parametros:' + document.getElementById('parametro1').value + ',' + document.getElementById('parametro2').value + ',' + document.getElementById('parametro3').value;
+      document.getElementById("error").innerHTML =
+        "Asegúrate de poner un número";
+    } else if (p3 % 1 !== 0) {
+      document.getElementById("error").innerHTML =
+        "El Número de iteraciones debe ser entero";
+    } else if (p1 < 0 || p1 > 1) {
+      document.getElementById("error").innerHTML =
+        "El gamma debe encontrarse entre 0 y 1";
+    } else if (p2 < 0 || p2 > 1) {
+      document.getElementById("error").innerHTML =
+        "La tasa de aprendizaje debe encontrarse entre 0 y 1";
+    } else if (p3 < 600 || p3 > 1500) {
+      document.getElementById("error").innerHTML =
+        "El número de iteraciones debe encontrarse entre 600 y 1500";
+    } else {
+      document.getElementById("error").innerHTML = "";
+      var parametros =
+        "Parametros:" +
+        document.getElementById("parametro1").value +
+        "," +
+        document.getElementById("parametro2").value +
+        "," +
+        document.getElementById("parametro3").value;
       console.log(parametros);
-      document.getElementById('btnEnviarParams').disabled = true;
-      document.getElementById('txtResultado').innerHTML = 'Esperando que se resuelva el modelo con los parámetros indicados, el límite de tiempo es 5 minutos';
+      document.getElementById("btnEnviarParams").disabled = true;
+      document.getElementById("txtResultado").innerHTML =
+        "Esperando que se resuelva el modelo con los parámetros indicados, el límite de tiempo es 5 minutos";
 
       var countDownDate = new Date().getTime() + 5 * 60000;
       var x = setInterval(function () {
-
         // Get today's date and time
         var now = new Date().getTime();
 
@@ -309,40 +310,52 @@ const Laberinto = () => {
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
-        document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+        document.getElementById("timer").innerHTML =
+          minutes + "m " + seconds + "s ";
 
-        // If the count down is over, write some text 
+        // If the count down is over, write some text
         if (distance < 0) {
           clearInterval(x);
           document.getElementById("timer").innerHTML = "EXPIRED";
         }
       }, 1000);
 
-
       if (ws.readyState === 1) {
         ws.send(parametros);
         console.log("se mando");
-      }
-      else {
+      } else {
         console.log("se mamo", ws.readyState);
         const ws = new WebSocket(serverAddress);
-      };
+      }
     }
-  };
+  }
 
   ws.onmessage = function (msg) {
     if (msg.data.toString().startsWith("Tiempo")) {
       console.log(msg.data);
       var array = msg.data.toString().split(":");
-      document.getElementById('txtResultado').innerHTML = 'El modelo encontró una solución en ' + array[1];
-      document.getElementById('btnVerEnVivo').disabled = false;
+      var a = document.createElement("a");
+      a.setAttribute(
+        "href",
+        "https://forms.office.com/Pages/ResponsePage.aspx?id=fAS9-kj_KkmLu4-YufucylyjiPt5ZQJHhoyI2uMf7Q9UQk1YQzZYTVVUSE0xQVJHQVZIVzlYNUJaSyQlQCNjPTEu"
+      );
+      a.innerHTML = "Link de forms";
+      a.setAttribute("target", "_blank");
+      a.onclick = function () {
+        document.getElementById("btnVerEnVivo").disabled = false;
+      };
+      document.getElementById("divForms").appendChild(a);
+      document.getElementById("txtResultado").innerHTML =
+        "El modelo encontró una solución en " +
+        array[1] +
+        ", llena el forms con este resultado y pulsa el botón para ver la solución en vivo";
       document.getElementById("timer").style.display = "none";
-    }
-    else if (msg.data.toString().startsWith("Excedio")) {
+    } else if (msg.data.toString().startsWith("Excedio")) {
       console.log(msg.data);
-      document.getElementById('txtResultado').innerHTML = 'El modelo se excedió en el tiempo de respuesta y no encontró solución';
+      document.getElementById("txtResultado").innerHTML =
+        "El modelo se excedió en el tiempo de respuesta y no encontró solución";
       document.getElementById("timer").style.display = "none";
-      document.getElementById('btnVerEnVivo').disabled = true;
+      document.getElementById("btnVerEnVivo").disabled = true;
     }
   };
 
@@ -351,48 +364,88 @@ const Laberinto = () => {
     if (ws.readyState === 1) {
       ws.send("Ejecutar");
       console.log("se mando ejecucion");
-    }
-    else {
+    } else {
       console.log("se mamo ejecucion", ws.readyState);
       const ws = new WebSocket(serverAddress);
     }
   }
 
+  function Tabla() {
+    return (
+      <table id="myTable" className="table">
+        <tbody>
+          <tr>
+            <th>Top</th>
+            <th>Tiempo</th>
+            <th>Nombre</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>¡Tiempo record!</td>
+            <td>¡Tu nombre puede estar aqui!</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
+
   return (
     <>
-
       <div className="row">
         <div className="col-12 col-lg-6">
-          <div className="row tituloSnippet">
-            Código de laberinto:
-          </div>
+          <div className="row tituloSnippet">Código de laberinto:</div>
           <div className="row snippet">
             <div dangerouslySetInnerHTML={{ __html: marked(markdown) }}></div>
           </div>
           <div className="row mt">
-            <div className="col-6 tituloSnippet">
-              Parámetros a modificar:
-            </div>
-            <div className="col-6 parametros" >
+            <div className="col-6 tituloSnippet">Parámetros a modificar:</div>
+            <div className="col-6 parametros">
               <form>
                 <div className="form-group">
                   <label htmlFor="parametro1">Gamma (0 a 1)</label>
-                  <input type="text" className="form-control" id="parametro1" placeholder="Ingresar valor de gamma" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="parametro1"
+                    placeholder="Ingresar valor de gamma"
+                  />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="parametro2">Tasa de Aprendizaje (0 a 1)</label>
-                  <input type="text" className="form-control" id="parametro2" placeholder="Ingresar taza de aprendizaje" />
+                  <label htmlFor="parametro2">
+                    Tasa de Aprendizaje (0 a 1)
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="parametro2"
+                    placeholder="Ingresar taza de aprendizaje"
+                  />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="parametro3">Número de iteraciones (600 a 1500)</label>
-                  <input type="text" className="form-control" id="parametro3" placeholder="Ingresar número de iteraciones deseadas" />
+                  <label htmlFor="parametro3">
+                    Número de iteraciones (600 a 1500)
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="parametro3"
+                    placeholder="Ingresar número de iteraciones deseadas"
+                  />
                 </div>
-                <div className="errorMessage" id="error"> </div>
-                <button type="button" id="btnEnviarParams" onClick={enviarParametros} className="btn btn-primary mt-2">Comprobar</button>
+                <div className="errorMessage" id="error">
+                  {" "}
+                </div>
+                <button
+                  type="button"
+                  id="btnEnviarParams"
+                  onClick={enviarParametros}
+                  className="btn btn-primary mt-2"
+                >
+                  Comprobar
+                </button>
               </form>
             </div>
           </div>
-
         </div>
 
         <div className="col-12 col-lg-6">
@@ -400,36 +453,42 @@ const Laberinto = () => {
             Laberinto usado para el ejercicio:
           </div>
           <div className="row align-center">
-            <img src="pyamaze.png" className="imagenMaze" alt="Imagen Pyamaze" />
+            <img
+              src="pyamaze.jpg"
+              className="imagenMaze"
+              alt="Imagen Pyamaze"
+            />
           </div>
           <div className="row">
             <div className="col-12 resultado" id="txtResultado"></div>
-            <div id="timer" className="timer"> </div>
+            <div id="timer" className="timer">
+              {" "}
+            </div>
+            <div id="divForms"></div>
             <div className="col-4 btnVer">
-              <form action="https://twitch.tv/aia_industrial" target="_blank" onClick={ejecutarRobot}>
-                <button type="submit" width="100px" className="btn btn-primary mt-2 btnVer" id="btnVerEnVivo" disabled={true}>Ver ejecución en vivo</button>
+              <form
+                action="https://twitch.tv/aia_industrial"
+                target="_blank"
+                onClick={ejecutarRobot}
+              >
+                <button
+                  type="submit"
+                  width="100px"
+                  className="btn btn-primary mt-2 btnVer"
+                  id="btnVerEnVivo"
+                  disabled={true}
+                >
+                  Ver ejecución en vivo
+                </button>
               </form>
             </div>
-            <div className="row tituloSnippet">
-            Ranking con resultados:
-          </div>
-            <table id="myTable" className="table">
-              <tr>
-                <th>Tiempo</th>
-                <th>Nombre</th>
-              </tr>
-              <tr>
-                <td>143.5</td>
-                <td>Alejandro Alcaraz</td>
-              </tr>
-              
-
-            </table>
+            <div className="row tituloSnippet">Ranking con resultados:</div>
+            <Tabla />
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Laberinto
+export default Laberinto;
