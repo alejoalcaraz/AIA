@@ -400,7 +400,7 @@ const Laberinto = () => {
             <div className="col-6 parametros">
               <form>
                 <div className="form-group">
-                  <label htmlFor="parametro1">Gamma (0 a 1)</label>
+                  <label htmlFor="parametro1">Gamma (0 a 1, punto decimal)</label>
                   <input
                     type="text"
                     className="form-control"
@@ -410,7 +410,7 @@ const Laberinto = () => {
                 </div>
                 <div className="form-group">
                   <label htmlFor="parametro2">
-                    Tasa de Aprendizaje (0 a 1)
+                    Tasa de Aprendizaje (0 a 1, punto decimal)
                   </label>
                   <input
                     type="text"
