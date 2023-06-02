@@ -3,6 +3,7 @@ import hljs from "highlight.js";
 import { marked } from "marked";
 import { useEffect, useRef } from "react";
 
+//Código de archivo QLearning.py, el cuál es el encargado de encontrar una solución para el laberinto en el computador local de AIA
 const markdown = `
 \`\`\`python
 # #Se importan las librerías de interés
@@ -253,18 +254,29 @@ if __name__ == "__main__":
 `;
 
 const Laberinto = () => {
+  //Uso de Highlight.js para el formato del visualizador del código
   useEffect(() => {
     hljs.highlightAll();
   });
 
+  //Dirección de servidor de Websocket
   const serverAddress = "wss://aia-remote-websocket-server.glitch.me/";
 
   const ws = new WebSocket(serverAddress);
 
+  // Inicio de comunicación con Websocket
   ws.onopen = function () {
     ws.send("Soy el lab");
   };
 
+  /*
+  Función de enviar parámetros
+  Revisa si los parámetros a enviar tienen el formato adecuado y si cumplen con el rango esperado
+  Si cumplen, se envían como texto separados por coma a través de websocket y se inicializa un 
+  temporizador, indicando el tiempo máximo que podría esperar el usuario antes de recibir una respuesta del 
+  computador del AIA.
+  Si los parámetros no tienen el formato esperado, se indica al usuario que debe solucionar el error.
+  */
   function enviarParametros() {
     var p1 = parseFloat(document.getElementById("parametro1").value);
     var p2 = parseFloat(document.getElementById("parametro2").value);
@@ -330,6 +342,11 @@ const Laberinto = () => {
     }
   }
 
+  /*
+  Recepción de mensajes mediante websocket.
+  Puede recibir mensajes que comiencen por Tiempo, cuando se haya encontrado una solución, o Excedio,
+  cuando los parámetros enviados no hayan convergido en una solución en menos de 5 minutos.
+  */
   ws.onmessage = function (msg) {
     if (msg.data.toString().startsWith("Tiempo")) {
       console.log(msg.data);
@@ -357,6 +374,9 @@ const Laberinto = () => {
     }
   };
 
+  /*
+  Funcion que envía la orden de ejecutar el brazo mecánico al encontrar una solución al laberinto. 
+  */
   function ejecutarRobot() {
     console.log("ejecutar");
     if (ws.readyState === 1) {
@@ -368,6 +388,9 @@ const Laberinto = () => {
     }
   }
 
+  /*
+  Tabla que contiene resultados registrados de los usuarios. Por implementar. 
+  */
   function Tabla() {
     return (
       <table id="myTable" className="table">
