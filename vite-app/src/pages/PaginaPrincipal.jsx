@@ -23,7 +23,7 @@ const PaginaPrincipal = () => {
 
         <div className="col-12 col-md-6 col-lg-3 mx-auto">
           <div className="row align-center">
-            <img src="laberinto.jpg" className="imagenAmb" alt="Imagen Laberinto" />
+            <img src="pyamaze.jpg" className="imagenAmb" alt="Imagen Laberinto" />
           </div>
           <div className="row">
             <div className="tituloAmb"> 1. Laberinto</div>

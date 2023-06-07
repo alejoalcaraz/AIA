@@ -98,18 +98,20 @@ body {
 
 .tituloSnippet {
   margin-top: 70px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-left: 155px;
   font-family: "Raleway";
-  font-weight: normal;
+  font-weight: bold;
   font-size: 25px;
   color: black;
   text-align: center;
 }
 
 .my-custom-scrollbar {
+  margin: auto;
   position: relative;
   height: 200px;
+  width: fit-content;
   overflow: auto;
 }
 .table-wrapper-scroll-y {
@@ -117,10 +119,10 @@ body {
 }
 
 .tituloSnippet2 {
-  margin-top: 10px;
+  margin-top: 30px;
   margin-left: 100px;
   font-family: "Raleway";
-  font-weight: normal;
+  font-weight: bold;
   font-size: 20px;
   color: black;
   text-align: right;
@@ -145,7 +147,14 @@ body {
 .parametros {
   margin: auto;
 }
-
+.form-control {
+  margin: auto;
+  width: 400px;
+}
+.form-group {
+  margin: auto;
+  width: 400px;
+}
 .imagenMaze {
   display: block;
   margin-top: 10px;
@@ -155,6 +164,15 @@ body {
   height: 400px;
 }
 
+.tituloTabla {
+  margin: auto;
+  margin-top: 20px;
+  font-family: "Raleway";
+  font-weight: bold;
+  font-size: 25px;
+  color: black;
+  text-align: center;
+}
 .resultado {
   font-family: "Raleway";
   font-weight: normal;

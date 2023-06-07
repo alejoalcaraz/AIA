@@ -370,10 +370,12 @@ const Laberinto = () => {
                 </button>
               </form>
             </div>
-            <div className="row tituloSnippet3">Ranking con resultados:</div>
-            <Tabla />
           </div>
         </div>
+        <div className="row">
+          <div className="tituloTabla">Ranking con resultados:</div>
+        </div>
+        <Tabla />
       </div>
     </>
   );
