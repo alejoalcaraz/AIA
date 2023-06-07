@@ -14,11 +14,8 @@ import Navbar from './components/Navbar';
 function App() {
   const [count, setCount] = useState(0)
 
-  return
-  // Rutas determinadas para la navegación dentro de la página, todos los ambientes deben tener su propia ruta.
-  <>
-    <Navbar></Navbar>
-
+  return <>
+  <Navbar></Navbar>
     <Routes>
       <Route path="/" element={<PaginaPrincipal />} />
       <Route path="/laberintoAIA" element={<Laberinto />} />

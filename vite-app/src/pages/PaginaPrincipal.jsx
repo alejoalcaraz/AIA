@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom"
 import Navbar from "../components/Navbar"
 
-//Página principal donde se puede navegar por todas los ambientes desarrollados
 const PaginaPrincipal = () => {
 
  
