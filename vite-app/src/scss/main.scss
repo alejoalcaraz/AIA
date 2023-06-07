@@ -99,6 +99,17 @@ body {
 }
 
 .tituloSnippet {
+    margin-top: 70px;
+    margin-bottom: 40px;
+    margin-left: 155px;
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 25px;
+    color: black;
+    text-align: center;
+}
+
+.tituloSnippet2 {
     margin-top: 10px;
     margin-left: 100px;
     font-family: 'Raleway';
@@ -106,6 +117,23 @@ body {
     font-size: 20px;
     color: black;
     text-align: right;
+}
+
+.btnComprobar {
+    font-size: 20px;    
+    color: white;
+    text-align: center;
+
+}
+
+.tituloSnippet3 {
+    margin-top: 10px;
+    margin-left: 100px;
+    font-family: 'Raleway';
+    font-weight: normal;
+    font-size: 20px;
+    color: black;
+    text-align: center;
 }
 
 .parametros {
@@ -146,6 +174,7 @@ body {
 
 .errorMessage {
     font-family: 'Raleway';
+    margin-bottom: 20px;
     font-weight: normal;
     font-size: 14px;
     color: red;
