@@ -6,6 +6,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebas
 import {
   getFirestore,
   doc,
+  setDoc,
   getDoc,
   getDocs,
   onSnapshot,
@@ -21,7 +22,7 @@ const Laberinto = () => {
     ws.send("Soy el lab");
     GetAllDataOnce();
   };
-
+  var username = "";
   /*
   Función de enviar parámetros
   Revisa si los parámetros a enviar tienen el formato adecuado y si cumplen con el rango esperado
@@ -34,6 +35,7 @@ const Laberinto = () => {
     var p1 = parseFloat(document.getElementById("parametro1").value);
     var p2 = parseFloat(document.getElementById("parametro2").value);
     var p3 = parseFloat(document.getElementById("parametro3").value);
+    username = document.getElementById("parametro4").value.toString();
     if (isNaN(p1) || isNaN(p2) || isNaN(p3)) {
       document.getElementById("error").innerHTML =
         "Asegúrate de poner un número";
@@ -49,6 +51,9 @@ const Laberinto = () => {
     } else if (p3 < 0 || p3 > 1500) {
       document.getElementById("error").innerHTML =
         "El número de iteraciones debe encontrarse entre 0 y 1500";
+    } else if (username.trim().length === 0) {
+      document.getElementById("error").innerHTML =
+        "El nombre de usuario no puede estar vacío";
     } else {
       document.getElementById("error").innerHTML = "";
       var parametros =
@@ -118,6 +123,13 @@ const Laberinto = () => {
         ", llena el forms con este resultado y pulsa el botón para ver la solución en vivo";
       document.getElementById("timer").style.display = "none";
       document.getElementById("btnVerEnVivo").disabled = false;
+      var tiempo = parseFloat(array[1].split("0")[0]);
+      console.log(tiempo, "tiempo");
+      setDoc(doc(db, "scores", username), {
+        time: tiempo,
+        user: username,
+      });
+      GetAllDataOnce();
     } else if (msg.data.toString().startsWith("Excedio")) {
       console.log(msg.data);
       document.getElementById("txtResultado").innerHTML =
@@ -142,28 +154,31 @@ const Laberinto = () => {
   }
 
   /*
-  Tabla que contiene resultados registrados de los usuarios. Por implementar. 
+  Tabla que contiene resultados registrados de los usuarios.
   */
   function Tabla() {
     return (
-      <table id="myTable" className="table">
-        <thead>
-          <tr>
-            <th>Top</th>
-            <th>Tiempo</th>
-            <th>Nombre</th>
-          </tr>
-        </thead>
-        <tbody id="tbody1">
-          <tr>
-            <td>1</td>
-            <td>¡Tiempo record!</td>
-            <td>¡Tu nombre puede estar aqui!</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="table-wrapper-scroll-y my-custom-scrollbar">
+        <table id="myTable" className="table">
+          <thead>
+            <tr>
+              <th>Top</th>
+              <th>Tiempo (Segundos)</th>
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody id="tbody1">
+            <tr>
+              <td>1</td>
+              <td>¡Tiempo record!</td>
+              <td>¡Tu nombre puede estar aqui!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     );
   }
+  //Funcion que añade un item a la tabla de resultados.
   function addItemToTable(user, time) {
     var table = document.getElementById("myTable");
     var row = table.insertRow(1);
@@ -175,6 +190,7 @@ const Laberinto = () => {
     cell3.innerHTML = user;
   }
 
+  // Funcion que añade todos los items de la base de datos a la tabla de resultados.
   function addAllItems(score) {
     document.getElementById("tbody1").innerHTML = "";
     score.forEach((element) => {
@@ -182,8 +198,50 @@ const Laberinto = () => {
       addItemToTable(element.user, element.time);
     });
     console.log("metido");
+    sortTable();
+    var rows = document.getElementById("myTable").rows;
+    for (var i = 1; i < rows.length; i++) {
+      rows[i].cells[0].innerHTML = i;
+    }
   }
 
+  // Funcion que ordena la tabla de resultados.
+  function sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("myTable");
+    switching = true;
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+      //start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /*Loop through all table rows (except the
+      first, which contains table headers):*/
+      for (i = 1; i < rows.length - 1; i++) {
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("td")[1];
+        y = rows[i + 1].getElementsByTagName("td")[1];
+        //check if the two rows should switch place:
+        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
+
+  //Configuraciones de firebase.
   const firebaseConfig = {
     apiKey: "AIzaSyD69L-Gjxkr70Rv9AP8-njeV4QOo2nRvRU",
     authDomain: "aiauniandes.firebaseapp.com",
@@ -199,6 +257,7 @@ const Laberinto = () => {
 
   const db = getFirestore();
 
+  //Funcion que obtiene todos los datos de la base de datos.
   async function GetAllDataOnce() {
     const querySnapshot = await getDocs(collection(db, "scores"));
 
@@ -210,7 +269,7 @@ const Laberinto = () => {
     console.log("veces");
     addAllItems(scores);
   }
-   
+
   return (
     <>
       <div className="row">
@@ -250,6 +309,15 @@ const Laberinto = () => {
                     className="form-control"
                     id="parametro3"
                     placeholder="Ingresar número de iteraciones deseadas"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="parametro4">Usuario uniandes</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="parametro4"
+                    placeholder="Ingresar usuario uniandes (sin @uniandes.edu.co)"
                   />
                 </div>
                 <div className="errorMessage" id="error">
