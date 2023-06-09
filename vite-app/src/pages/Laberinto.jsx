@@ -123,7 +123,7 @@ const Laberinto = () => {
         ", llena el forms con este resultado y pulsa el botón para ver la solución en vivo";
       document.getElementById("timer").style.display = "none";
       document.getElementById("btnVerEnVivo").disabled = false;
-      var tiempo = parseFloat(array[1].split("0")[0]);
+      var tiempo = parseFloat(array[1].split(" ")[0]);
       console.log(tiempo, "tiempo");
       setDoc(doc(db, "scores", username), {
         time: tiempo,
